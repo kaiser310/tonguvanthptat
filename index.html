@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổ Ngữ Văn THPT An Thới</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <!-- Khối màu đen tiêu đề -->
+    <header class="header">
+        <div>
+            <h1>Trường THPT An Thới</h1>
+            <h2> Tổ Ngữ văn </h2>
+            <img src="images/nen.jpg" alt="Tiêu Đề Bài Báo" class="header-image">
+        </div>
+    </header>
+    
+    <!-- Các tab chuyển đổi nội dung -->
+    <div class="tab-container">
+        <button class="tab-button active" onclick="openTab('tab1')">Trang chủ</button>
+        <button class="tab-button" onclick="openTab('tab2')">Truyện</button>
+        <button class="tab-button" onclick="openTab('tab3')">Thơ</button>
+        <button class="tab-button" onclick="openTab('tab4')">Khác</button>
+        <button class="tab-button" onclick="openTab('tab5')">Đề</button>
+    </div>
+
+    <!-- Nội dung các tab -->
+    <!-- TRANG CHỦ -->
+    <div id="tab1" class="tab-content active">
+        <h2>Một số tác phẩm tiêu biểu</h2>
+        <div class="image-container"> 
+            <figure>
+                <a href="#video-chiec-thuyen-ngoai-xa" onclick="openTab('tab2', 'video-chiec-thuyen-ngoai-xa')" class="no-underline">
+                    <img src="images/th.jpg" alt="Chiếc thuyền ngoài xa" class="image-style">
+                    <figcaption>Chiếc thuyền ngoài xa</figcaption>
+                </a>
+            </figure>   
+            <figure>
+                <a href="#truyen-kieu" onclick="openTab('tab3', 'truyen-kieu')" class="no-underline">
+                    <img src="images/truyen-kieu.webp" alt="Truyện Kiều" class="image-style">
+                    <figcaption>Truyện Kiều</figcaption>
+                </a>
+            </figure>
+            <figure>
+                <a href="#parasite" onclick="openTab('tab4', 'parasite')" class="no-underline">
+                    <img src="images/1692173.jpg" alt="Phim Parasite" class="image-style">
+                    <figcaption>Phim Parasite</figcaption>
+                </a>
+            </figure>
+        </div>
+    </div>
+
+    <!-- TRUYỆN -->
+    <div id="tab2" class="tab-content">
+        <h2>Nội dung Tất Cả</h2>
+        <p>Đây là nội dung tổng hợp tất cả.</p>
+        <div class="table-of-contents">
+            <h2>Mục Lục</h2>
+            <ul>
+                <li><a href="#video-chiec-thuyen-ngoai-xa">Chiếc thuyền ngoài xa</a></li>
+            </ul>
+        </div>
+        <div id="tac-pham-1" class="content-section">
+            <h2>Chiếc thuyền ngoài xa</h2>
+            <h3> Tác giả: Nhóm 2 - Lớp 11B9 - Năm học: 2023-2024</h3>
+            <video controls width="100%" height="auto" id="video-chiec-thuyen-ngoai-xa">
+                <source src="videos/CHIẾC THUYỀN NGOÀI XA.mp4" type="video/mp4">
+                <source src="video.ogg" type="video/ogg">
+            </video>
+        </div>
+    </div>
+
+    <!-- THƠ -->
+    <div id="tab3" class="tab-content">
+        <h2>Nội dung Thơ</h2>
+        <p>Đây là nội dung về thơ.</p>
+        <div class="table-of-contents">
+            <h2>Mục Lục</h2>
+            <ul>
+                <li><a href="#truyen-kieu">Truyện Kiều</a></li>
+            </ul>
+        </div>
+        <div id="tac-pham-1" class="content-section">
+            <h2>Truyện Kiều</h2>
+            <h3> Tác giả: Lê Thị Bình - Lớp 11B4 - Năm học: 2024-2025</h3>
+            <video controls width="100%" height="auto" id="truyen-kieu">
+                <source src="videos/Truyện Kiều.mp4" type="video/mp4">
+                <source src="video.ogg" type="video/ogg">
+            </video>
+        </div>
+    </div>
+
+    <!-- KHÁC -->
+    <div id="tab4" class="tab-content">
+        <h2>Nội dung Khác</h2>
+      
+        <div class="table-of-contents">
+            <h2>Mục Lục</h2>
+            <ul>
+                <li><a href="#parasite">Parasite</a></li>
+            </ul>
+        </div>
+        <div id="tac-pham-1" class="content-section">
+            <h2> Phim: Parasite</h2>
+            <h3> Tác giả: Nguyễn Huyền Như Ngọc - Lớp 11B4 - Năm học: 2023-2024</h3>
+            <video controls width="100%" height="auto" id="parasite">
+                <source src="videos/Phim Parasite.mp4" type="video/mp4">
+                <source src="video.ogg" type="video/ogg">
+            </video>
+        </div>
+    </div>
+
+    <!-- ĐỀ -->
+    <div id="tab5" class="tab-content">
+        <h2>Nội dung Khác</h2>
+      
+        <div class="table-of-contents">
+            <h2>Mục Lục</h2>
+            <ul>
+                <li><a href="#parasite">Parasite</a></li>
+            </ul>
+        </div>
+        <div id="tac-pham-1" class="content-section">
+            <h2> Phim: Parasite</h2>
+            <h3> Tác giả: Nguyễn Huyền Như Ngọc - Lớp 11B4 - Năm học: 2023-2024</h3>
+            <video controls width="100%" height="auto" id="parasite">
+                <source src="videos/Phim Parasite.mp4" type="video/mp4">
+                <source src="video.ogg" type="video/ogg">
+            </video>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
