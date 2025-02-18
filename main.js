@@ -44,32 +44,41 @@ function openTab(tabId, targetId = null) {
 document.addEventListener('DOMContentLoaded', () => {
     openTab('tab1');
 });
-// Dừng video khi không ở phần của video
-// Hàm để xử lý dừng video khi không còn trong phạm vi của div chứa
-function setupVideoAutoPause() {
-    // Lấy tất cả các video trên trang
-    const videos = document.querySelectorAll('video');
-  
-    // Duyệt qua từng video
-    videos.forEach(video => {
-      // Tạo IntersectionObserver cho mỗi video
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          // Kiểm tra nếu video không còn trong phạm vi hiển thị
-          if (!entry.isIntersecting) {
-            video.pause();  // Dừng video khi không còn trong phạm vi
-          }
+document.addEventListener('DOMContentLoaded', () => {
+    // Lấy tất cả các div chứa video
+    const videoContainers = document.querySelectorAll('.content-section');
+
+    videoContainers.forEach(container => {
+        let isTouchingContainer = false;
+
+        // Sự kiện khi người dùng chạm vào div
+        container.addEventListener('touchstart', () => {
+            isTouchingContainer = true;
         });
-      }, {
-        root: null,  // null có nghĩa là theo dõi với viewport của trình duyệt
-        threshold: 0.5  // Khi ít nhất 50% video không còn trong phạm vi nhìn thấy
-      });
-  
-      // Bắt đầu quan sát video
-      observer.observe(video);
+
+        // Sự kiện khi người dùng rời khỏi div
+        container.addEventListener('touchend', (event) => {
+            isTouchingContainer = false;
+
+            // Kiểm tra xem người dùng có chạm vào phần tử khác ngoài div không
+            const touch = event.changedTouches[0];
+            const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
+
+            if (!container.contains(elementAtTouch)) {
+                // Nếu người dùng chạm vào phần tử khác ngoài div, dừng video
+                const video = container.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            }
+        });
+
+        // Sự kiện khi chuột rời khỏi div (dành cho máy tính)
+        container.addEventListener('mouseleave', () => {
+            const video = container.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+        });
     });
-  }
-  
-  // Gọi hàm để thiết lập auto-pause cho tất cả video
-  setupVideoAutoPause();
-  
+});
