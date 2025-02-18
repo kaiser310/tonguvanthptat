@@ -165,9 +165,10 @@ video {
     .footer-box {
         width: 100%;
         background: linear-gradient(to right, #82aff1, #5172f8, #5d1df1);
-        text-align: center;
+        text-align: left;
         font-family: Arial, sans-serif;
         box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+        margin: auto;
         
       }
 
