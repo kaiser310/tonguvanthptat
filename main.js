@@ -47,31 +47,26 @@ document.addEventListener('DOMContentLoaded', () => {
 // Dừng video khi không ở phần của video
 // Hàm để xử lý dừng video khi không còn trong phạm vi của div chứa
 function setupVideoAutoPause() {
-    // Lấy tất cả các video và div chứa video
+    // Lấy tất cả các video trên trang
     const videos = document.querySelectorAll('video');
-    
+  
+    // Duyệt qua từng video
     videos.forEach(video => {
-      // Lấy phần tử div chứa video (div có thể là phần tử cha của video)
-      const container = video.closest('div'); // Giả sử div chứa video là phần tử cha
-  
-      // Kiểm tra nếu video có container
-      if (container) {
-        // Tạo IntersectionObserver cho mỗi video
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-              // Nếu video không còn trong phạm vi của container, dừng video
-              video.pause();
-            }
-          });
-        }, {
-          root: container, // Đặt vùng gốc là container của video
-          threshold: 0.5 // Khi ít nhất 50% video không còn trong vùng nhìn thấy
+      // Tạo IntersectionObserver cho mỗi video
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          // Kiểm tra nếu video không còn trong phạm vi hiển thị
+          if (!entry.isIntersecting) {
+            video.pause();  // Dừng video khi không còn trong phạm vi
+          }
         });
+      }, {
+        root: null,  // null có nghĩa là theo dõi với viewport của trình duyệt
+        threshold: 0.5  // Khi ít nhất 50% video không còn trong phạm vi nhìn thấy
+      });
   
-        // Bắt đầu quan sát video
-        observer.observe(video);
-      }
+      // Bắt đầu quan sát video
+      observer.observe(video);
     });
   }
   
