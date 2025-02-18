@@ -45,41 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
     openTab('tab1');
 });
 // Dừng video khi không ở phần của video
-document.addEventListener('DOMContentLoaded', () => {
-    // Lấy tất cả các div chứa video
-    const videoContainers = document.querySelectorAll('.content-section');
-
-    videoContainers.forEach(container => {
-        let isTouchingContainer = false;
-
-        // Sự kiện khi người dùng chạm vào div
-        container.addEventListener('touchstart', () => {
-            isTouchingContainer = true;
-        });
-
-        // Sự kiện khi người dùng rời khỏi div
-        container.addEventListener('touchend', (event) => {
-            isTouchingContainer = false;
-
-            // Kiểm tra xem người dùng có chạm vào phần tử khác ngoài div không
-            const touch = event.changedTouches[0];
-            const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
-
-            if (!container.contains(elementAtTouch)) {
-                // Nếu người dùng chạm vào phần tử khác ngoài div, dừng video
-                const video = container.querySelector('video');
-                if (video) {
-                    video.pause();
-                }
+// Hàm để xử lý dừng video khi không còn trong phạm vi của div chứa
+function setupVideoAutoPause() {
+    // Lấy tất cả các video và div chứa video
+    const videos = document.querySelectorAll('video');
+    
+    videos.forEach(video => {
+      // Lấy phần tử div chứa video (div có thể là phần tử cha của video)
+      const container = video.closest('div'); // Giả sử div chứa video là phần tử cha
+  
+      // Kiểm tra nếu video có container
+      if (container) {
+        // Tạo IntersectionObserver cho mỗi video
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              // Nếu video không còn trong phạm vi của container, dừng video
+              video.pause();
             }
+          });
+        }, {
+          root: container, // Đặt vùng gốc là container của video
+          threshold: 0.5 // Khi ít nhất 50% video không còn trong vùng nhìn thấy
         });
-
-        // Sự kiện khi chuột rời khỏi div (dành cho máy tính)
-        container.addEventListener('mouseleave', () => {
-            const video = container.querySelector('video');
-            if (video) {
-                video.pause();
-            }
-        });
+  
+        // Bắt đầu quan sát video
+        observer.observe(video);
+      }
     });
-});
+  }
+  
+  // Gọi hàm để thiết lập auto-pause cho tất cả video
+  setupVideoAutoPause();
+  
