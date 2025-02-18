@@ -46,14 +46,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Dừng video khi không ở phần của video
 document.addEventListener('DOMContentLoaded', () => {
+    // Lấy tất cả các div chứa video
     const videoContainers = document.querySelectorAll('.content-section');
 
     videoContainers.forEach(container => {
+        let isTouchingContainer = false;
+
+        // Sự kiện khi người dùng chạm vào div
+        container.addEventListener('touchstart', () => {
+            isTouchingContainer = true;
+        });
+
+        // Sự kiện khi người dùng rời khỏi div
+        container.addEventListener('touchend', (event) => {
+            isTouchingContainer = false;
+
+            // Kiểm tra xem người dùng có chạm vào phần tử khác ngoài div không
+            const touch = event.changedTouches[0];
+            const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
+
+            if (!container.contains(elementAtTouch)) {
+                // Nếu người dùng chạm vào phần tử khác ngoài div, dừng video
+                const video = container.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            }
+        });
+
+        // Sự kiện khi chuột rời khỏi div (dành cho máy tính)
         container.addEventListener('mouseleave', () => {
-            console.log('Mouse left the container');
             const video = container.querySelector('video');
             if (video) {
-                console.log('Pausing video');
                 video.pause();
             }
         });
