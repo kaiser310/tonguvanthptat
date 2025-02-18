@@ -44,3 +44,18 @@ function openTab(tabId, targetId = null) {
 document.addEventListener('DOMContentLoaded', () => {
     openTab('tab1');
 });
+// Dừng video khi không ở phần của video
+document.addEventListener('DOMContentLoaded', () => {
+    const videoContainers = document.querySelectorAll('.content-section');
+
+    videoContainers.forEach(container => {
+        container.addEventListener('mouseleave', () => {
+            console.log('Mouse left the container');
+            const video = container.querySelector('video');
+            if (video) {
+                console.log('Pausing video');
+                video.pause();
+            }
+        });
+    });
+});
