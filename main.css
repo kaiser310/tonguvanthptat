@@ -164,9 +164,9 @@ video {
 /* Cre dưới cùng trang chủ */
     .footer-box {
         width: 100%;
-        background: rgb(68, 127, 68);
+        background: rgb(76, 200, 235);
         font-family: Arial, sans-serif;
-        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px -2px 5px rgba(3, 109, 138, 0.1);
         text-align: left ;
         
       }
